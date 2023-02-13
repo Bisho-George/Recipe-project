@@ -20,9 +20,9 @@ export class RecipeEditComponent implements OnInit {
       (params: Params) => {
         this.id = +params['id'];
         this.editMode = params['id'] != null;
-        this.initForm(); 
+        this.initForm();
       }
-    )  
+    )
   }
 
   onSubmit () {
@@ -31,7 +31,7 @@ export class RecipeEditComponent implements OnInit {
     }
     else {
       this.recipeService.addRecipes(this.recipeForm.value);
-      
+
     }
     this.onCancel();
   }
@@ -72,7 +72,7 @@ export class RecipeEditComponent implements OnInit {
           }));
         }
       }
-      
+
     }
     this.recipeForm = new FormGroup ({
       'name': new FormControl(recipeName, Validators.required),
@@ -85,5 +85,6 @@ export class RecipeEditComponent implements OnInit {
   getIngredients () {
     return (<FormArray>this.recipeForm.get('ingredients')).controls;
   }
+  
 
 }

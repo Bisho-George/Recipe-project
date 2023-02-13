@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Router, RouterModule, Routes } from "@angular/router";
+import { RecipeResolverService } from "./recipes-resolver.service";
 import { RecipeDetailsComponent } from "./recipes/recipe-details/recipe-details.component";
 import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component";
 import { RecipeItemComponent } from "./recipes/recipe-list/recipe-item/recipe-item.component";
@@ -20,11 +21,13 @@ const appRoutes: Routes = [
             },
             {
                 path: ':id',
-                component: RecipeDetailsComponent
+                component: RecipeDetailsComponent,
+                resolve: [RecipeResolverService]
             },
             {
                 path: ':id/edit',
-                component: RecipeEditComponent
+                component: RecipeEditComponent,
+                resolve: [RecipeResolverService]
             }
         ]
     },
@@ -36,5 +39,5 @@ const appRoutes: Routes = [
 })
 
 export class AppRoutingModule {
-    
+
 }
