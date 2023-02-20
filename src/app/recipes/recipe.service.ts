@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core'
-import { Router } from '@angular/router'
-import { Subject } from 'rxjs'
-import { Ingredients } from '../shared/ingredients.model'
-import { ShoppingListService } from '../shopping-list/shopping-service.service'
-import { Recipe } from './recipe.model'
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { Ingredients } from '../shared/ingredients.model';
+import { ShoppingListService } from '../shopping-list/shopping-service.service';
+import { Recipe } from './recipe.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
-  recipesChanged = new Subject<Recipe[]>()
+  recipesChanged = new Subject<Recipe[]>();
   // private recipes: Recipe[] = [
   //   new Recipe(
   //     'Chicken',
@@ -25,21 +25,23 @@ export class RecipeService {
   //   ),
   // ]
   private recipes: Recipe[] = [];
-  constructor(private slServices: ShoppingListService, private router: Router) {}
+  constructor(
+    private slServices: ShoppingListService,
+    private router: Router
+  ) {}
 
   getRecipes() {
-    return this.recipes.slice()
+    return this.recipes.slice();
   }
   addIngredientsToShoppingList(ingredient: Ingredients[]) {
     this.slServices.addIngredients(ingredient);
   }
-  getRecipeById (recipeId: number) {
+  getRecipeById(recipeId: number) {
     return this.recipes[recipeId];
   }
-  addRecipes (recipe: Recipe) {
+  addRecipes(recipe: Recipe) {
     this.recipes.push(recipe);
     this.recipesChanged.next(this.recipes.slice());
-
   }
   updateRecipe(index: number, newRecipe: Recipe) {
     this.recipes[index] = newRecipe;
@@ -50,11 +52,8 @@ export class RecipeService {
     this.recipes.splice(index, 1);
     this.recipesChanged.next(this.recipes.slice());
   }
-  setRecipes (recipes: Recipe[]) {
+  setRecipes(recipes: Recipe[]) {
     this.recipes = recipes;
-    this.recipesChanged.next(this.recipes.slice())
+    this.recipesChanged.next(this.recipes.slice());
   }
-
-
-
 }
